@@ -1,6 +1,6 @@
 ---
 title: "Exploratory Data Analysis of Global Data from Gampminder in R"
-output: github_document
+output: html_document
 author: "Hari Cheboyina"
 ---
 ###Gapminder Package Description:
@@ -11,12 +11,31 @@ author: "Hari Cheboyina"
     + year: going from 1952 to 2007 in increments of 5 years
     + pop: population
     + gdpPercap: GDP per capita
-    + lifeExp: life expectancy
+    + lifeExp: life expectancy  
+
+###Libraries Used:
+* Gapminder
+* ggplot2
+* dplyr
+    
+***
+> Import libraries
 
 ```{r, message = FALSE}
 library(gapminder)
 library(ggplot2)
 library(dplyr)
+
+
+```
+### Summary of Gapminder Data 
+```{r, message = FALSE}
+summary(gapminder)
+```
+
+
+```{r, message = FALSE}
+
 gapminder %>%
   select(country, lifeExp, year, pop) %>%
   filter(country =="China" |
