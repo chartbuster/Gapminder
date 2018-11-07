@@ -1,10 +1,19 @@
 ---
-title: "Gapminder"
+title: "Exploratory Data Analysis of Global Data from Gampminder in R"
 output: github_document
 author: "Hari Cheboyina"
 ---
+###Gapminder Package Description:
+* 1704 observations
+* 6 variables
+    + country: a factor with 142 levels
+    + continent: a factor with 5 levels
+    + year: going from 1952 to 2007 in increments of 5 years
+    + pop: population
+    + gdpPercap: GDP per capita
+    + lifeExp: life expectancy
 
-```{r}
+```{r, message = FALSE}
 library(gapminder)
 library(ggplot2)
 library(dplyr)
@@ -55,4 +64,10 @@ plot(lifeExp ~ gdpPercap, gap_with_colors,
 
 ```
 
-
+```{r}
+ggplot(subset(gapminder, continent != "Americas"))+
+       aes(x = year, y = lifeExp, group = country, color = country) +
+  geom_line(lwd = 1, show.legend = FALSE) + facet_wrap(~ continent) +
+  scale_color_manual(values = country_colors) +
+  theme_bw() + theme(strip.text = element_text(size = rel(1.1)))
+```
