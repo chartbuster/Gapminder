@@ -28,14 +28,17 @@ library(dplyr)
 
 
 ```
-### Summary of Gapminder Data 
+##### Summary of Gapminder Data 
 ```{r, message = FALSE}
 summary(gapminder)
 ```
+summary(dataframe) results in Minimum, 1st Quartile, Median, Mean, 3rd Quartile, Maximum of the dataframe.
 
+> Comparing Variables
 
+##### Now that we have imported the data, lets compare two variables. 
+###### I wonder how life expectancy varies in the two most populus countries in the world. Lets compare the life expectancy rate of China and India side by side using ggplot
 ```{r, message = FALSE}
-
 gapminder %>%
   select(country, lifeExp, year, pop) %>%
   filter(country =="China" |
@@ -44,7 +47,12 @@ ggplot(aes(x=country, y=lifeExp, col=year, size=log(pop)))+
   geom_point(alpha=0.4)+
   geom_smooth(method=lm)
 ```
+Well we can observe that the life expectancy has increased in both the countries over the years. We can observe that the people in china live longer than people in India. Well, this is trickier thing to conclude based on this graph, but if you google the infant mortality rate in India, you will know why. (Unless you understand the relation between infant mortality rate and life expectancy)
 
+***
+####How about relationship between gdp(Gross domestic product) and life expectancy? Does more GDP of a country indicate it's people can live longer and viceversa? Lets find out.
+
+Lets filter the countries with GDP lessthan $50000 and plot a graph using ggplot and wrap the countries within their respective continents.
 ```{r}
 gapminder %>%
   filter(gdpPercap<50000) %>%
